@@ -24,4 +24,7 @@ object ActionCont extends IndexedContsTInstances with IndexedContsTFunctions {
 
   def run(f: Request[AnyContent] => ActionCont[Result])(implicit ec: ExecutionContext): Action[AnyContent] =
     Action.async(f(_).run_)
+
+  def recover[A](actionCont: ActionCont[A])(pf: PartialFunction[Throwable, Future[Result]])(implicit executor: ExecutionContext): ActionCont[A] =
+    ActionCont(f => actionCont.run(f).recoverWith(pf))
 }
