@@ -10,5 +10,5 @@ object PjaxCont {
   type Template = String => Html => Html
 
   def apply(fullTemplate: Template)(implicit request: RequestHeader, ec: ExecutionContext): ActionCont[Template] =
-    ActionCont.successful(if (request.headers.keys("X-Pjax")) html.pjaxTemplate.apply _ else fullTemplate)
+    ActionCont.successful(if (request.headers.keys("X-Pjax")) html.pjaxTemplate.apply else fullTemplate)
 }

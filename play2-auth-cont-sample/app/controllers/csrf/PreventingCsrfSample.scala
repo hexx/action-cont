@@ -42,6 +42,6 @@ trait PreventingCsrfSample extends Controller with AuthElementCont with TokenVal
       message <- FormCont.hasErrors(form, request)(_ => throw new Exception)
     } yield Ok(message).as("text/plain")
   )
-
 }
+
 object PreventingCsrfSample extends PreventingCsrfSample

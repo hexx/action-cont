@@ -13,7 +13,7 @@ package object cont {
         actionCont.run(a =>
           if (f(a)) {
             k(a)
-          }  else {
+          } else {
             throw new NoSuchElementException("ActionCont must not fail to filter.")
           }
         )

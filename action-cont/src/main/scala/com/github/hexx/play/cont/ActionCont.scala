@@ -23,6 +23,5 @@ object ActionCont extends IndexedContsTInstances with IndexedContsTFunctions {
     fromFuture(Future.failed(throwable))
 
   def run(f: Request[AnyContent] => ActionCont[Result])(implicit ec: ExecutionContext): Action[AnyContent] =
-    Action.async(request => f(request).run_)
-
+    Action.async(f(_).run_)
 }
