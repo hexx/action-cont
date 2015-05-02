@@ -4,6 +4,13 @@ val commonSettings = Seq(
   resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"
 )
 
+lazy val root = (project in file(".")).aggregate(
+  actionCont,
+  actionContSimple,
+  actionContLib,
+  play2AuthContSample
+)
+
 lazy val actionCont = (project in file("action-cont")).settings(
   commonSettings ++ Seq(
     name := "action-cont",
@@ -14,6 +21,14 @@ lazy val actionCont = (project in file("action-cont")).settings(
       "org.typelevel"     %% "scalaz-contrib-210" % "0.1.5",
       "com.typesafe.play" %% "play-test"          % play.core.PlayVersion.current % "test",
       "org.scalatest"     %% "scalatest"          % "2.2.4"                       % "test"
+    )
+  ):_*
+)
+
+lazy val actionContSimple = (project in file("action-cont-simple")).settings(
+  commonSettings ++ Seq(
+    libraryDependencies ++= Seq(
+      "com.typesafe.play" %% "play" % play.core.PlayVersion.current % "provided"
     )
   ):_*
 )
